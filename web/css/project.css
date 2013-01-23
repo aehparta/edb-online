@@ -1,0 +1,588 @@
+/* EXAMPLE OF A FONT-FACE
+@font-face {
+    font-family: 'SpecialEliteRegular';
+    src: url('/web/fonts/specialelite/SpecialElite-webfont.eot');
+    src: url('/web/fonts/specialelite/SpecialElite-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/web/fonts/specialelite/SpecialElite-webfont.woff') format('woff'),
+         url('/web/fonts/specialelite/SpecialElite-webfont.ttf') format('truetype'),
+         url('/web/fonts/specialelite/SpecialElite-webfont.svg#SpecialEliteRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+/* ***************************************************************** */
+/* GLOBAL STYLES (body, h1-h5, p, a, hr...)                          */
+/* ***************************************************************** */
+body {
+    font-size: 12px;
+    background-color: #eeeeee;
+    color: #333333;
+    font-family: Helvetica, Arial;
+}
+
+h1 {
+    font-family: Times;
+    font-size: 36px;
+    margin: 0 0 15px 0;
+    padding: 0 0 0 20px;
+}
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0 7px 0;
+    padding: 0;
+}
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 7px 0;
+    padding: 0;
+}
+h4 {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 17px;
+    margin: 0 0 7px 0;
+    padding: 0;
+}
+h5 {
+
+}
+
+a {
+    color: #0289c3;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a.text {
+    color: #312e2a;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px dotted grey;
+    height: 1px;
+}
+
+
+
+/* FORM ELEMENTS */
+label,
+input[type=text],
+input[type=url],
+input[type=email],
+textarea,
+select {
+    display:block; position:relative; float:left;
+    width: 400px;
+}
+input[type=checkbox] {
+    display:block; position:relative; float:left;
+}
+input[type=text],
+input[type=url],
+input[type=password],
+input[type=email] {
+    padding: 5px 7px 5px 7px;
+    background-color: #f0f0f0;
+    border: 1px solid #888888;
+    -moz-box-shadow: inset 0px 2px 4px -2px #333333;
+    -webkit-box-shadow: inset 0px 2px 4px -2px #333333;
+    box-shadow: inset 0px 2px 4px -2px #333333;
+    vertical-align: top;
+}
+textarea {
+    border: 1px solid #888888;
+    padding: 5px 7px 5px 7px;
+    background-color: #f0f0f0;
+    vertical-align: top;
+}
+option {
+    padding-right: 7px;
+}
+
+/* ***************************************************************** */
+/* BUTTONS AND HELPERS (buttons, ajax loaders etc.)                  */
+/* ***************************************************************** */
+
+/* Icon buttons */
+a.icon_button {
+    display:block; position:relative; float:left;
+    cursor: pointer;
+    z-index: 10000;
+}
+a.icon_button span.icon_30 {
+    display:block; position:relative; float:left;
+    width: 30px; height: 30px;
+    background-image: url('/web/images/icons_sprite.png');
+}
+a.icon_button span.text {
+    display:block; position:relative; float:left;
+       font-size: 12px;
+    font-weight: bold;
+    color: #0088c3;
+    line-height: 30px;
+    height: 30px;
+    padding: 0 0 0 5px;
+}
+a.icon_button:hover span.text {
+    text-decoration: underline;
+}
+a.icon_button span.text_green {
+    color: #209500;
+}
+a.icon_button span.text_red {
+    color: #c3001c;
+}
+a.icon_button_addBottle span.icon_30 {
+    background-position: -0px -0px;
+}
+a.icon_button_tasting span.icon_30 {
+    background-position: -30px -0px;
+}
+a.icon_button_note span.icon_30 {
+    background-position: -60px -0px;
+}
+a.icon_button_details span.icon_30 {
+    background-position: -90px -0px;
+}
+a.icon_button_ok span.icon_30 {
+    background-position: -120px -0px;
+}
+a.icon_button_cancel span.icon_30 {
+    background-position: -150px -0px;
+}
+a.icon_button_addWish span.icon_30 {
+    background-position: -180px -0px;
+}
+a.icon_button_sort span.icon_30 {
+    background-position: -210px -0px;
+}
+
+
+
+/* BUTTON STYLES */
+a.button {
+    display:block; float:none;
+    text-decoration: none;
+}
+a.button,
+button {
+/*  display:block; position:relative; float:left; */
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-width: 0px;
+    border-collapse: collapse;
+    background-color: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    width: 100px;
+}
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+a.button span,
+button span {
+    display: block; position: relative; float:left;
+    width: 90%;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 0 0 10%;
+    background-color: transparent;
+    background-image: url('/web/images/buttons_sprite.png?t=19082011');
+    background-repeat: no-repeat;
+    height: 26px;
+}
+a.button span span,
+button span span {
+    display: block; position: relative; float: right;
+    z-index: 1000;
+    background-color: transparent;
+    background-image: url('/web/images/buttons_sprite.png?t=19082011');
+    background-repeat: no-repeat;
+    width: 90%;
+    font-size: 12px;
+    margin: 0;
+    padding: 0 10% 0 0;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    height: 26px;
+    font-size: 12px;
+    line-height: 26px;
+    text-shadow: 0px -1px 1px #666666, 0px 1px 1px #dddddd;
+}
+a.button:active span span,
+button:active span span {
+    padding-top: 2px;
+    height: 24px;
+    line-height: 24px;
+}
+
+/* Button sizes */
+button.h22, a.button_h22 { width: 60px; }
+button.h22 span, a.button_h22 span { height: 22px; }
+button.h22 span span, a.button_h22 span span {
+    height: 22px;
+    font-size: 11px;
+    line-height: 22px;
+}
+button.h22:active span span, a.button_h22:active span span {
+    height: 20px;
+    line-height: 20px;
+}
+
+button.h24, a.button_h24 { width: 80px; }
+button.h24 span, a.button_h24 span { height: 24px; }
+button.h24 span span, a.button_h24 span span {
+    height: 24px;
+    font-size: 12px;
+    line-height: 24px;
+}
+button.h24:active span span, a.button_h24:active span span {
+    height: 24px;
+    line-height: 23px;
+}
+
+
+button.h26, a.button_h26 { width: 80px; }
+button.h26 span, a.button_h26 span { height: 26px; }
+button.h26 span span, a.button_h26 span span {
+    height: 26px;
+    font-size: 12px;
+    line-height: 26px;
+}
+button.h26:active span span, a.button_h26:active span span {
+    height: 24px;
+    line-height: 24px;
+}
+
+button.h30, a.button_h30 { width: 110px; }
+button.h30 span, a.button_h30 span { height: 30px; }
+button.h30 span span, a.button_h30 span span {
+    height: 30px;
+    font-size: 13px;
+    line-height: 30px;
+}
+button.h30:active span span, a.button_h30:active span span {
+    height: 28px;
+    line-height: 28px;
+}
+
+/* Default (h26 blue) */
+button span, a.button span { background-position: left -22px; }
+button span span, a.button span span { background-position: right -22px; }
+button:active span, a.button:active span { background-position: left -494px; }
+button:active span span, a.button:active span span { background-position: right -494px; }
+
+/* Yellow (default) buttons */
+button.h22 span, a.button_h22 span { background-position: left -0px; }
+button.h22 span span, a.button_h22 span span { background-position: right -0px; }
+button.h24 span, a.button_h24 span { background-position: left -101px; }
+button.h24 span span, a.button_h24 span span { background-position: right -101px; }
+button.h26 span, a.button_h26 span { background-position: left -22px; }
+button.h26 span span, a.button_h26 span span { background-position: right -22px; }
+button.h30 span, a.button_h30 span { background-position: left -41px; }
+button.h30 span span, a.button_h30 span span { background-position: right -41px; }
+
+/* Yellow (default) buttons active (pressed) */
+button.h22:active span, a.button_h22:active span { background-position: left -472px; }
+button.h22:active span span, a.button_h22:active span span { background-position: right -472px; }
+button.h24:active span, a.button_h24:active span { background-position: left -125px; }
+button.h24:active span span, a.button_h24:active span span { background-position: right -125px; }
+button.h26:active span, a.button_h26:active span { background-position: left -494px; }
+button.h26:active span span, a.button_h26:active span span { background-position: right -494px; }
+button.h30:active span, a.button_h30:active span { background-position: left -71px; }
+button.h30:active span span, a.button_h30:active span span { background-position: right -71px; }
+
+
+/* Ajax loaders */
+span.ajax_loader {
+  padding: 0px;
+  display:block; position:relative; float:left;
+}
+span.ajax_loader_16_blackonwhite {
+  width:16px; height: 16px;
+  background-image: url('http://static.kotikokki.net/layout_images/ajax_loaders/ajax-loader-16-blackonwhite.gif?t=16082011');
+}
+
+
+img.avatar_normal {
+  max-width: 160px;
+  max-height: 200px;
+  width: expression(this.width > 160 ? "160px" : true);
+  height: expression(this.height > 200 ? "200px" : true);
+}
+
+
+/* Thumbs and Comments icons */
+div.thumbs,
+div.comments {
+    height: 30px;
+    float: right;
+}
+div.thumbs a,
+div.comments a {
+    display:block; position:relative; float:left;
+    height: 30px;
+    text-decoration: none;
+    color: #484848;
+    font-size: 11px;
+}
+div.thumbs a span.thumbs_text,
+div.comments a span.comments_text {
+    display:block; position:relative; float:left;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0;
+}
+div.thumbs a span.thumbs_icon,
+div.comments a span.comments_icon {
+    display:block; position:relative; float:left;
+    width: 30px; height: 30px;
+    background-image: url('/web/images/icons_sprite.png');
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+div.thumbs a:hover span.thumbs_text,
+div.comments a:hover span.comments_text {
+    text-decoration: underline;
+}
+div.thumbs a span.thumbs_icon {
+    width: 26px; padding: 0 4px 0 0;
+    background-position: -210px -60px;
+}
+div.comments a span.comments_icon {
+    background-position: -180px -60px;
+}
+
+
+/* ***************************************************************** */
+/* PAGE STRUCTURE                                                    */
+/* ***************************************************************** */
+
+
+#header_wrap {
+    width: 100%;
+    height: 100px;
+    z-index: 3;
+    background-color: #999999;
+}
+
+#header_content {
+    float: none;
+    margin: 0 auto;
+    width: 980px;
+    padding: 0 0 0 0;
+    height: 100%;
+    background-color: transparent;
+    background-color: #888888;
+}
+
+#main_wrap {
+    float: none;
+    margin: 0 auto;
+    width: 980px;
+}
+#main_content{
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+}
+
+#footer_wrap {
+    width: 100%;
+    height: 300px;
+    background-color: #333333;
+}
+#footer_content {
+    float: none;
+    margin: 0 auto;
+    width: 980px;
+    padding: 0 0 0 0;
+    height: 100%;
+    background-color: #444444;
+}
+
+/*
+div#header_login {
+    position:absolute;
+    left: 0px;
+    top: 12px;
+    width: 800px;
+    padding: 0 20px 0 20px;
+
+    text-align: right;
+    font-size: 12px;
+}
+div#header_login a {
+    color: #333333;
+    font-weight: bold;
+}
+*/
+
+ul#menu_main {
+    width: 100%;
+    color: white;
+}
+ul#menu_main li {
+    padding-left: 15px;
+}
+ul#menu_main li a {
+    color: white;
+    float: left;
+    padding-right: 15px;
+}
+ul#menu_main li a span {
+    font-size: 15px;
+    line-height: 15px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    height: 15px;
+    float:left;
+}
+ul#menu_main li.current {
+    background: url('/web/images/buttons_sprite.png') top left;
+    margin: 0 0 0 0;
+}
+ul#menu_main li.current a {
+    color: black;
+    background: url('/web/images/buttons_sprite.png') top right;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+ul#menu_main li.current a span {
+    text-shadow: 0px -1px 1px white, 0px 1px 1px #222222;
+}
+
+
+
+
+/* *********** Box *********** */
+div.box {
+    width: 220px;
+    background: url('/web/images/leftcol_box_background.png') no-repeat top left;
+    margin: 0 0 15px 0;
+}
+
+div.box div.box_title {
+    height: 35px;
+    width: 100%;
+    background-image: url('/web/images/leftcol_box_background.png');
+    background-color: #d4cfc7;
+}
+
+div.box div.box_title span.icon {
+    display:block; position:relative; float:left;
+    width: 30px; height: 30px;
+    background-image: url('/web/images/icons_sprite.png');
+    margin: 2px 2px 0 5px;
+}
+div.box div.box_title h2 {
+    color: #4e4840;
+    line-height:35px;
+    padding: 0 0 0 20px;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    margin: 0;
+}
+div.box div.box_title span.icon_notes {
+    background-position: -60px -30px;
+}
+div.box div.box_title span.icon_star {
+    background-position: -90px -30px;
+}
+div.box div.box_title span.icon_feed {
+    background-position: -120px -30px;
+}
+div.box div.box_title span.icon_addBottle {
+    background-position: -0px -30px;
+}
+
+div.left_column div.box div.title h2 {
+    border-left: 13px solid white;
+    border-right: 13px solid white;
+}
+
+
+div.box div.box_title h2 a {
+    color:#2e9d00;
+}
+div.box div.box_title h2 a:hover {
+    text-decoration: underline;
+}
+div.box div.box_content {
+    margin: 20px 0 0 0;
+    padding: 0 20px 20px 20px;
+    width: 180px;
+    background: url('/web/images/leftcol_box_background.png') no-repeat bottom left;
+}
+
+
+div.box div.box_content p {
+    font-size: 11px;
+    line-height: 15px;
+}
+
+
+
+
+/* jQuery Datepicker */
+
+
+/* TODO: VOITAIS EHKÄ TEHDÄ JOKU jquery-ui.css tai vastaava */
+
+div.ui-datepicker {
+  padding: 7px;
+  background-color: white;
+  border: 1px solid #888888;
+  width: 170px;
+  margin: 2px 0 0 0;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+
+  -moz-box-shadow: 0px 1px 2px #888888;
+  -webkit-box-shadow: 0px 1px 2px #888888;
+  box-shadow: 0px 1px 2px #888888;
+  z-index: 10000;
+}
+div.ui-datepicker-header {
+  width: 100%;
+}
+div.ui-datepicker-header a.ui-datepicker-prev,
+div.ui-datepicker-header a.ui-datepicker-next {
+  display:block; position:relative; float:left;
+  width: 50%;
+  font-size: 11px;
+}
+div.ui-datepicker-header a.ui-datepicker-next {
+  text-align: right;
+}
+div.ui-datepicker-title {
+  width: 100%;
+  background-color: #ebebeb;
+  padding: 3px 0 3px 0;
+  text-align: center;
+  margin: 3px 0 3px 0;
+  color: #666666;
+}
+table.ui-datepicker-calendar {
+  width: 100%;
+  text-align: center;
+}
+table.ui-datepicker-calendar td {
+}
+table.ui-datepicker-calendar td.ui-datepicker-current-day {
+  background-color: #ebebeb;
+}
+

@@ -1,0 +1,21 @@
+
+EDBContentBundle_:
+    resource: "@EDBContentBundle/Resources/config/routing.yml"
+    prefix:   /content
+
+EDBFrontpageBundle_:
+    resource: "@EDBFrontpageBundle/Resources/config/routing.yml"
+    prefix:   /
+
+EDBBrowserBundle_:
+    resource: "@EDBBrowserBundle/Resources/config/routing.yml"
+    prefix:   /browser
+
+AehpartaSecurityBundle_:
+    resource: "@AehpartaSecurityBundle/Resources/config/routing.yml"
+    prefix:   /security
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

@@ -1,0 +1,36 @@
+Aehparta\SecurityBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: Aehparta\SecurityBundle\Entity\UserRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+        username:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+
+        deleted:
+            type: boolean
+        created:
+            type: datetime
+        modified:
+            type: datetime
+
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

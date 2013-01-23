@@ -1,0 +1,8 @@
+parameters:
+    aehpartasecuritybundle.users.class:               Aehparta\SecurityBundle\Services\Users
+    aehpartasecuritybundle.users.className:           Aehparta\SecurityBundle\Entity\User
+
+services:
+    aehpartasecuritybundle.users:
+        class:      %aehpartasecuritybundle.users.class%
+        arguments:  [ "@doctrine.orm.entity_manager", "%aehpartasecuritybundle.users.className%", "@security.encoder_factory" ]

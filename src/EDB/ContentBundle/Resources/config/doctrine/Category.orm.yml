@@ -1,0 +1,30 @@
+EDB\ContentBundle\Entity\Category:
+    type: entity
+    table: null
+    repositoryClass: EDB\ContentBundle\Entity\CategoryRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+        title:
+            type: string
+            length: 255
+        # description
+        description:
+            type: text
+        parent:
+            type: integer
+
+        deleted:
+            type: boolean
+        created:
+            type: datetime
+        modified:
+            type: datetime
+
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

@@ -1,0 +1,22 @@
+{% if is_granted('ROLE_USER') %}
+<div id='edb-form-category' class='site-form editable-container' edb-category-id='{{ category_id }}' site-form-method='PUT' site-form-url='{{ path('EDBContentBundle_category', { 'identifier': 0, '_format': 'json' }) }}'>
+<div class='site-form-header'>
+<h2>Add new category under {{ category }}</h2>
+</div>
+<div class='site-form-error site-form-message'></div>
+
+<div class='site-form-content'>
+<input name='parent' static='true' type='hidden' class='site-form-input' value='{{ category_id }}' />
+<span>Title:</span><br />
+<input name='title' type='text' class='site-form-input' value='' /><br />
+<span>Description:</span><br />
+<div name='description' class='editable editable-enabled'>
+</div>
+</div>
+
+<div class='site-form-footer'>
+<button type='button' class='site-form-button site-form-send'>Save</button>
+<button type='button' class='site-form-button site-form-close'>Cancel</button>
+</div>
+</div>
+{% endif %}

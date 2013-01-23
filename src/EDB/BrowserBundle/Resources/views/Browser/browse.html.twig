@@ -1,0 +1,50 @@
+<div id='edb-browser'
+    edb-category-id='{{ category_id }}'
+    edb-controller='{{ path('EDBBrowserBundle_browse', { 'category_id': category_id }) }}'
+    edb-browser-url='{{ path('EDBFrontpageBundle_browse', { 'category_id': category_id }) }}'
+    >
+
+<div id='edb-browser-header'>
+
+<div id='edb-browser-search'>
+    <input id='edb-browser-search-query' edb-search-url='{{ path('EDBContentBundle_search', { 'category_id': category_id }) }}' value='' />
+    <img id='edb-browser-search-send' src='{{ asset('images/coquette/16x16/search.png') }}' />
+</div>
+
+<ul id='edb-browser-path'>
+<li class='edb-path-root'>/</li>
+{% for p in parents %}
+<li class='edb-category' edb-category-id='{{ p.id }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': p.id }) }}'>{{ p.title }}</li>
+<li>/</li>
+{% endfor %}
+<li class='edb-category' edb-category-id='{{ category_id }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': category_id }) }}'>{{ category }}</li>
+</ul>
+
+</div>
+
+<table class='tbl edb-articles'>
+<tr class='tbl-row edb-loading'><td span='2'><img class='tbl-icon' src='{{ asset('images/loading/ring-black-64x64.png') }}' /></td></tr>
+{% if parent > 0 %}
+<tr class='tbl-row edb-category' edb-category-id='{{ parent }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': parent }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/back.png') }}' /><div class='tbl-label'>..</div></td></tr>
+{% else %}
+<tr class='tbl-row edb-category' edb-category-id='{{ category_id }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': category_id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/folder.png') }}' /><div class='tbl-label'>.</div></td></tr>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+<tr class='tbl-row edb-add-category' form-url='{{ path('EDBBrowserBundle_forms_category', { 'category_id': category_id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/add_to_folder.png') }}' /><div class='tbl-label'>Add category</div></td></tr>
+<tr class='tbl-row edb-add-article' form-url='{{ path('EDBBrowserBundle_forms_article', { 'category_id': category_id, 'article_id': 0 }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/add_page.png') }}' /><div class='tbl-label'>Add article</div></td></tr>
+{% endif %}
+
+{% for category in categories %}
+<tr class='tbl-row edb-category' edb-category-id='{{ category.id }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': category.id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/folder.png') }}' /><div class='tbl-label'>{{ category.title }}</div></td></tr>
+{% endfor %}
+
+{% for article in articles %}
+<tr class='tbl-row edb-article' edb-article-id='{{ article.id }}' form-url='{{ path('EDBBrowserBundle_forms_article', { 'category_id': category_id, 'article_id': article.id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/text_page.png') }}' /><div class='tbl-label'>{{ article.title }}</div></td></tr>
+{% endfor %}
+
+<table class='tbl edb-results'>
+</table>
+
+</table>
+</div>

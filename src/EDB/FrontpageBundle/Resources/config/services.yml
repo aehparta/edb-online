@@ -1,0 +1,7 @@
+parameters:
+#    elukka_frontpage.example.class: EDB\FrontpageBundle\Example
+
+services:
+#    elukka_frontpage.example:
+#        class: %elukka_frontpage.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

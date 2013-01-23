@@ -1,0 +1,26 @@
+parameters:
+    edbcontentbundle.resources.class:               EDB\ContentBundle\Services\Resources
+    edbcontentbundle.resources.className:           EDB\ContentBundle\Entity\Resource
+    edbcontentbundle.categories.class:              EDB\ContentBundle\Services\Categories
+    edbcontentbundle.categories.className:          EDB\ContentBundle\Entity\Category
+    edbcontentbundle.articles.class:                EDB\ContentBundle\Services\Articles
+    edbcontentbundle.articles.className:            EDB\ContentBundle\Entity\Article
+    edbcontentbundle.attachments.class:             EDB\ContentBundle\Services\Attachments
+    edbcontentbundle.attachments.className:         EDB\ContentBundle\Entity\Attachment
+
+services:
+    edbcontentbundle.resources:
+        class:      %edbcontentbundle.resources.class%
+        arguments:  ["@doctrine.orm.entity_manager", "%edbcontentbundle.resources.className%" ]
+
+    edbcontentbundle.categories:
+        class:      %edbcontentbundle.categories.class%
+        arguments:  ["@doctrine.orm.entity_manager", "%edbcontentbundle.categories.className%" ]
+
+    edbcontentbundle.articles:
+        class:      %edbcontentbundle.articles.class%
+        arguments:  ["@doctrine.orm.entity_manager", "@edbcontentbundle.resources", "%edbcontentbundle.articles.className%" ]
+
+    edbcontentbundle.attachments:
+        class:      %edbcontentbundle.attachments.class%
+        arguments:  ["@doctrine.orm.entity_manager", "%edbcontentbundle.attachments.className%" ]

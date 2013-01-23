@@ -1,0 +1,16 @@
+EDBFrontpageBundle_index:
+    pattern:  /
+    defaults: { _controller: EDBFrontpageBundle:Default:index }
+
+EDBFrontpageBundle_browse:
+    pattern:  /browse/{category_id}/{article_id}
+    defaults: { _controller: EDBFrontpageBundle:Default:browse, category_id: 0, article_id: 0 }
+    requirements:
+        category_id: \d+
+        article_id: \d+
+
+
+EDBFrontpageBundle_search:
+    pattern:  /search
+    defaults: { _controller: EDBFrontpageBundle:Default:search }
+    

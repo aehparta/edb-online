@@ -1,0 +1,38 @@
+EDB\ContentBundle\Entity\Attachment:
+    type: entity
+    table: null
+    repositoryClass: EDB\ContentBundle\Entity\AttachmentRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+        title:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        file:
+            type: string
+            length: 255
+        mime:
+            type: string
+            length: 255
+        screenshot:
+            type: integer
+        hidden:
+            type: boolean
+            
+        deleted:
+            type: boolean
+        created:
+            type: datetime
+        modified:
+            type: datetime
+
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]

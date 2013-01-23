@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+<h1>Article browser</h1>
+<div id='edb-browser'
+    edb-category-id='{{ category_id }}'
+    edb-controller='{{ path('EDBBrowserBundle_browse', { 'category_id': category_id }) }}'
+    edb-browser-url='{{ path('EDBFrontpageBundle_browse', { 'category_id': category_id }) }}'>
+<table class='tbl edb-articles'>
+</table>
+<table class='tbl edb-results'>
+</table>
+</div>
+
+{% endblock content %}

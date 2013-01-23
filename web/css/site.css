@@ -1,0 +1,436 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	width: auto;
+	margin: 0 auto;
+	background: #191919;
+	color: white;
+}
+
+table
+{
+	border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+    padding: 5px 10px 5px 10px;
+    background: #ccc;
+}
+
+a
+{
+	outline: none;
+}
+
+a img
+{
+	border: 0px;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+/******************************************************************************/
+/* navi */
+#site-navi td {
+    padding-right: 20px;
+}
+
+#site-navi a
+{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+#site-navi img {
+    display: block;
+}
+
+#site-navi a span {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.6em;
+    width: 32px;
+    text-align: center;
+}
+
+/******************************************************************************/
+/* login */
+#site-login {
+    position: absolute;
+    padding: 3px;
+    top: 50px;
+    margin-left: 730px;
+    background: #fff;
+    border: 1px solid #777;
+    border-bottom: 0px;
+    font-size: 0.8em;
+}
+
+/******************************************************************************/
+/* content etc */
+#site-body {
+	color: black;
+	margin: auto auto 40px;
+	width: 864px;
+}
+
+/*
+#site-content-lt
+{
+	width: 32px;
+	height: 32px;
+	background: url("/images/border/corners.png") no-repeat transparent;
+	background-position: left top;
+}
+
+#site-content-t
+{
+	background: url("/images/border/border_t.png") repeat transparent;
+}
+
+#site-content-rt
+{
+	width: 32px;
+	height: 32px;
+	background: url("/images/border/corners.png") no-repeat transparent;
+	background-position: right top;
+}
+
+#site-content-l
+{
+	background: url("/images/border/border_l.png") repeat transparent;
+}
+
+#site-content-r
+{
+	background: url("/images/border/border_r.png") repeat transparent;
+}
+
+#site-content-lb
+{
+	width: 32px;
+	height: 32px;
+	background: url("/images/border/corners.png") no-repeat transparent;
+	background-position: left bottom;
+}
+
+#site-content-b
+{
+	background: url("/images/border/border_b.png") repeat transparent;
+}
+
+#site-content-rb
+{
+	width: 32px;
+	height: 32px;
+	background: url("/images/border/corners.png") no-repeat transparent;
+	background-position: right bottom;
+}
+*/
+
+#site-content-div {
+    margin: 0;
+    padding: 0;
+    background: url('/images/home2.png') no-repeat #fff;
+}
+
+#page-content-td {
+    padding: 32px;
+    border: 0px solid #444;
+}
+
+#page-content
+{
+    color: black;
+    width: 800px;
+    min-height: 300px;
+}
+
+#page-content h1
+{
+    font-size: 24pt;
+    margin-bottom: 10px;
+}
+
+#page-content h2
+{
+    font-size: 20pt;
+    margin: 10px 0px 10px 10px;
+}
+
+#page-content h3
+{
+    font-size: 16pt;
+    margin: 5px 0px 5px 5px;
+}
+
+#page-content h2 img
+{
+    margin-right: 10px;
+}
+
+#subnavi
+{
+    background: #202020;
+    padding: 6px 20px 6px 20px;
+    border-radius: 14px;
+    border: 0px solid #404040;
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+#subnavi li
+{
+    display: inline;
+    margin: 0px 5px 0px 5px;
+}
+
+#subnavi .icon
+{
+    margin-right: 5px;
+}
+
+#subnavi a
+{
+    text-decoration: none;
+    color: #a0a0a0;
+    font-size: 12pt;
+}
+
+#subnavi a:hover
+{
+    text-decoration: underline;
+}
+
+.disabled {
+    color: #aaa !important;
+}
+
+.disabled a {
+    color: #aaa !important;
+}
+
+/******************************************************************************/
+/* lists */
+.list {
+    list-style-type: none;
+}
+
+.list a {
+    color: #000;
+}
+
+/******************************************************************************/
+/* forms */
+.site-form {
+    color: #000000;
+    border: 0px solid #ccc;
+    display: none;
+}
+
+.site-form-header, .site-form-content {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+}
+
+.site-form-content {
+    padding: 5px;
+}
+
+.site-form-content table {
+    width: 100%;
+}
+
+.site-form-footer {
+    margin-top: 10px;
+    padding-top: 3px;
+    text-align: right;
+}
+
+.site-form-error {
+    display: none;
+    font-size: 9pt;
+    font-weight: bold;
+    color: #fdd;
+    border: 1px solid #522;
+    background: #722;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+}
+
+.site-form-input-label
+{
+    padding-right: 10px;
+    font-size: 10pt;
+    text-align: right;
+    cursor: help;
+}
+
+.site-form-button, .site-form-input, .site-form-textarea {
+    background: #ddd;
+    border: 1px solid #aaa;
+    font-size: 9pt;
+    font-weight: normal;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 5px;
+    min-height: 20px;
+}
+
+.site-form-button {
+    font-weight: bold;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.site-form-textarea {
+    width: 90%;
+}
+
+.site-form-button:hover {
+    background: #bbb;
+}
+
+.site-form-button:active {
+    background: #aaa;
+}
+
+/******************************************************************************/
+/* default tables */
+.tbl {
+    border: 1px solid #aaa;
+    width: 100%;
+}
+
+.tbl-row {
+    cursor: pointer;
+    background: #eef;
+}
+
+.tbl-row-static {
+    background: #ccd;
+}
+
+.tbl-row:hover {
+    background: #bcd;
+}
+
+.tbl td {
+    padding: 3px;
+}
+
+.tbl-icon {
+    margin: 0px 5px 0px 5px;
+}
+
+.tbl-label {
+    display: inline;
+    vertical-align: top;
+}
+
+/******************************************************************************/
+/* editable contents (aloha) */
+div.aloha-sidebar-bar {
+    display: none !important;
+}
+
+.ui-tooltip {
+    display: none;
+}
+
+.editable {
+    margin: 5px;
+    padding: 3px;
+    border: 1px solid transparent;
+}
+
+.editable-enabled {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.editable-tools {
+    float: right;
+    right: 0px;
+    top: 0px;
+    display: none;
+}
+
+.editable-tools-mode-start {
+}
+
+.editable-tools-mode-edit {
+    display: none;
+}
+
+.editable-edit-title {
+    display: none;
+    padding: 5px;
+}
+
+/******************************************************************************/
+/* uploadify customization (uploadify.css not needed at all) */
+.uploadify-queue-item {
+    font-size: 0.8em;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.uploadify-queue-item .cancel {
+    display: none;
+}
+
+.uploadify-queue-item .filename {
+    color: #000;
+}
+
+.uploadify-queue-item .data {
+    color: #777;
+}
+
+.uploadify-button {
+    text-align: center;
+}
+
+/******************************************************************************/
+/* image browser */
+.site-image-browser {
+    display: none;
+}
+
+.site-image-browser ul {
+    list-style-type: none;
+}
+
+.site-image-browser li {
+    display: inline;
+    cursor: pointer;
+}
+
+.site-image-browser-image {
+    max-width: 130px;
+    max-height: 130px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px dashed #333;
+    padding: 2px;
+    margin: 5px;
+}
+
+.site-image-browser-image-title {
+}
+

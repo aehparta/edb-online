@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+<div class='editable' editable-resource='{{ path('EDBContentBundle_resource', { 'identifier': main_content_id, '_format': 'json' }) }}'>
+{% render('EDBContentBundle:Resource:get') with {'identifier': main_content_id } %}
+</div>
+
+{% endblock content %}

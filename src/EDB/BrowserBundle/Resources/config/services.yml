@@ -1,0 +1,7 @@
+parameters:
+#    edb_browser.example.class: EDB\BrowserBundle\Example
+
+services:
+#    edb_browser.example:
+#        class: %edb_browser.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

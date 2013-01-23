@@ -1,0 +1,13 @@
+
+<table class='tbl edb-articles'>
+
+<tr class='tbl-row-static'>
+    <td>
+        Results found: {{ count }}{% if count > limit %}, display first {{ limit }}{% endif %}
+    </td>
+</tr>
+{% for article in articles %}
+<tr class='tbl-row edb-article' edb-article-id='{{ article.id }}' form-url='{{ path('EDBBrowserBundle_forms_article', { 'category_id': category_id, 'article_id': article.id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/text_page.png') }}' /><div class='tbl-label'>{{ article.title }}</div></td></tr>
+{% endfor %}
+
+</table>

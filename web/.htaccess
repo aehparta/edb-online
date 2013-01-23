@@ -1,0 +1,16 @@
+Options +FollowSymlinks
+RewriteEngine on
+AddDefaultCharset UTF-8
+
+RewriteCond %{REQUEST_URI} !\.ico$ [NC]
+RewriteCond %{REQUEST_URI} !\.png$ [NC]
+RewriteCond %{REQUEST_URI} !\.jpg$ [NC]
+RewriteCond %{REQUEST_URI} !^/images [NC]
+RewriteCond %{REQUEST_URI} !^/uploadify [NC]
+RewriteCond %{REQUEST_URI} !^/bundles [NC]
+RewriteCond %{REQUEST_URI} !^/js [NC]
+RewriteCond %{REQUEST_URI} !^/uploads [NC]
+RewriteCond %{REQUEST_URI} !^/css [NC]
+
+RewriteRule ^(.*)\.* app_dev.php [NC,L,NE]
+

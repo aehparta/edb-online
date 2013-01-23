@@ -1,0 +1,134 @@
+<div id='edb-form-article'
+    class='site-form editable-container'
+    edb-article-id='{{ id }}'
+    edb-category-id='{{ category_id }}'
+    edb-browser-url='{{ path('EDBFrontpageBundle_browse', { 'category_id': category_id, 'article_id': id }) }}'
+    site-form-method='PUT'
+    site-form-url='{{ path('EDBContentBundle_article', { 'identifier': id, '_format': 'json' }) }}'
+    >
+
+{% if is_granted('ROLE_USER') %}
+<div class='editable-tools'>
+{% if id < 1 %}
+    <button class='site-form-button site-form-send' type='button'>Save</button>
+    <button class='site-form-button site-form-close' type='button'>x</button>
+{% else %}
+    <button class='site-form-button editable-tools-mode-start editable-tools-delete' type='button'>Delete</button>
+    <button class='site-form-button editable-tools-mode-start editable-tools-edit' type='button'>Edit</button>
+    <button class='site-form-button editable-tools-mode-start site-form-close' type='button'>x</button>
+    <button class='site-form-button editable-tools-mode-edit site-form-send' type='button'>Save</button>
+    <button class='site-form-button editable-tools-mode-edit editable-tools-stop' type='button'>Stop</button>
+{% endif %}
+</div>
+{% else %}
+<div class='editable-tools'>
+    <button class='site-form-button site-form-close' type='button'>x</button>
+</div>
+{% endif %}
+
+<div class='site-form-header'>
+{% if id < 1 %}
+<h2>Add new article under {{ category }}</h2>
+{% else %}
+<h2>&nbsp;</h2>
+{% endif %}
+</div>
+<div class='site-form-error site-form-message'></div>
+
+<div id='edb-article-div-document' class='site-form-content edb-article-chapter'>
+
+<h3>Documentation</h3>
+<span class='editable-edit-title'>Portrait:<br /></span>
+
+<div id='edb-article-portrait'>
+    <a id='edb-article-portrait-edit' href='#edb-article-image-browser'><img name='portrait' alt='Click to add' src='{{ portrait }}' /></a>
+    <a id='edb-article-portrait-show' href='{{ portrait }}'><img src='{{ portrait }}' /></a>
+</div>
+
+<input name='category_id' static='true' type='hidden' class='site-form-input' value='{{ category_id }}' />
+<input name='article_id' static='true' type='hidden' class='site-form-input' value='{{ id }}' />
+<span class='editable-edit-title'>Title:<br /></span>
+<h1 name='title' class='editable editable-single-line'>{{ title | raw }}</h1>
+<span class='editable-edit-title'>Description:<br /></span>
+<div name='description' class='editable'>{{ description | raw }}</div>
+</div>
+
+<div id='edb-article-div-attachments' class='site-form-content edb-article-chapter'>
+<h3>Attachments</h3>
+<ul id='edb-article-attachments' file-post-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': 0, '_format': 'json' }) }}'>
+
+{% for attachment in attachments %}
+{% if attachment.hidden == 0 %}
+<li id='{{ attachment.id }}' class='edb-article-attachment'
+    edb-attachment-mod-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': attachment.id, '_format': 'json' }) }}'>
+    <a target='edb-pdf-window' href='{{ attachment.url }}'>
+        {% set _icon = '/images/aesthetica/16x16/cd.png' %}
+        {% if attachment.mime_family == 'image' %}
+            {% set _icon = '/images/aesthetica/16x16/image.png' %}
+        {% elseif attachment.mime_family == 'text' %}
+            {% set _icon = '/images/aesthetica/16x16/page.png' %}
+        {% elseif attachment.mime_type == 'pdf' %}
+            {% set _icon = '/images/aesthetica/16x16/pdf.png' %}
+        {% elseif attachment.mime_type == 'zip' or attachment.mime_type == 'rar' %}
+            {% set _icon = '/images/aesthetica/16x16/archive.png' %}
+        {% endif %}
+        <img class='icon' src='{{ asset(_icon) }}' />
+        {{ attachment.title }}
+    </a>
+    <div class='edb-article-attachment-tools'>
+        {% if is_granted('ROLE_USER') %}
+            <img class='icon edb-article-attachment-tool edb-article-attachment-delete' src='{{ asset('/images/aesthetica/16x16/remove.png') }}' />
+        {% endif %}
+    </div>
+</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+{% if is_granted('ROLE_USER') %}
+<input type='file' id='edb-article-attachment-upload' />
+{% endif %}
+</div>
+
+<div class='site-form-footer'>
+<!-- <button type='button' class='site-form-button site-form-send'>Save</button>
+<button type='button' class='site-form-button site-form-close'>Cancel</button> -->
+</div>
+
+<div id='edb-article-image-browser' class='site-image-browser'>
+<div id='edb-article-image-select'>
+<h1>Select image</h1>
+<h3>From attachments</h3>
+<ul>
+{% for attachment in attachments %}
+    {% if attachment.mime_family == 'image' %}
+        <li>
+            <img class='site-image-browser-image' src='{{ attachment.url }}' />
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+<h3>From image library</h3>
+<ul>
+<li>
+    <img class='site-image-browser-image' src='' alt='No picture' />
+</li>
+{% for attachment in imagelibrary %}
+    {% if attachment.mime_family == 'image' %}
+        <li>
+            <img class='site-image-browser-image' src='{{ attachment.url }}' />
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+<div id='edb-article-image-crop'>
+<h1>Crop image</h1>
+<button type='button' id='edb-article-image-browser-save' class='site-form-button'>Save</button>
+<img src='' />
+</div>
+
+</div>
+
+</div>

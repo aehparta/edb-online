@@ -1,0 +1,19 @@
+
+EDBBrowserBundle_browse:
+    pattern:  /browse/{category_id}
+    defaults: { _controller: EDBBrowserBundle:Browser:browse }
+    requirements:
+        category_id: \d+
+
+EDBBrowserBundle_forms_category:
+    pattern:  /forms/category/{category_id}
+    defaults: { _controller: EDBBrowserBundle:Forms:category }
+    requirements:
+        category_id: \d+
+
+EDBBrowserBundle_forms_article:
+    pattern:  /forms/article/{category_id}/{article_id}
+    defaults: { _controller: EDBBrowserBundle:Forms:article }
+    requirements:
+        category_id: \d+
+        article_id: \d+

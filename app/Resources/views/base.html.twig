@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}eDB{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel='stylesheet' href='{{ asset('css/site.css') }}' />
+            <link rel='stylesheet' href='{{ asset('css/edb.css') }}' />
+            <link rel='stylesheet' href='{{ asset('js/fancybox-2.1.3/source/jquery.fancybox.css') }}' />
+            <link rel='stylesheet' href='{{ asset('js/aloha/css/aloha.css') }}' />
+            <link rel='stylesheet' href='{{ asset('js/Jcrop/css/jquery.Jcrop.min.css') }}' />
+            <link rel='stylesheet' href='{{ asset('bundles/edbbrowser/css/bundle.css') }}' />
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+        <script src="{{ asset('js/aloha/lib/require.js') }}"></script>
+        <script src="{{ asset('js/jquery-1.8.3.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui/jquery-ui-1.9.2.custom.min.js') }}"></script>
+        <script src="{{ asset('js/aloha/lib/aloha-bare.js') }}" data-aloha-plugins="common/ui,common/format,common/highlighteditables,common/link,common/image"></script>
+        <script src="{{ asset('js/jquery.history.js') }}"></script>
+        <script src="{{ asset('js/uploadify/jquery.uploadify.js') }}"></script>
+        <script src="{{ asset('js/fancybox-2.1.3/source/jquery.fancybox.js') }}"></script>
+        <script src="{{ asset('js/Jcrop/js/jquery.Jcrop.min.js') }}"></script>
+
+        <script src="{{ asset('js/site-form.js') }}"></script>
+        <script src="{{ asset('js/site.js') }}"></script>
+        <script src="{{ asset('bundles/edbbrowser/js/bundle.js') }}"></script>
+    </head>
+    <body>{% block body %}
+        <div id='site-body'>
+            <div id='site-header'>
+                {% if is_granted('ROLE_USER') %}
+                    <div id='site-login'>Logged as: {{ app.user.username }}</div>
+                {% endif %}
+                <table id='site-navi'><tr>
+                    <td><a href='{{ path('EDBFrontpageBundle_index') }}'><img src='{{ asset('images/home.png') }}' /></a></td>
+                    <td><a title="Browse" href='{{ path('EDBFrontpageBundle_browse') }}'><img src='{{ asset('images/coquette/32x32/folder.png') }}' /><span>Browse</span></a></td>
+                    {% if is_granted('ROLE_USER') %}
+                        <td><a title="Logout" href='{{ path('AehpartaSecurityBundle_logout') }}'><img src='{{ asset('images/coquette/32x32/user.png') }}' /><span>Logout</span></a></td>
+                    {% else %}
+                        <td><a title="Login" href='{{ path('AehpartaSecurityBundle_login') }}'><img src='{{ asset('images/coquette/32x32/user.png') }}' /><span>Login</span></a></td>
+                    {% endif %}
+                </tr></table>
+            </div>
+            <div id='site-content-div'>
+                <table>
+                <tr><td id='site-content-lt'></td><td id='site-content-t'></td><td id='site-content-rt'></td></tr>
+                <tr>
+                    <td id='site-content-l'></td>
+                    <td id='page-content-td'><div id='page-content'>
+<!--                        <div class='editable-tools'>
+                            <button class='site-form-button editable-tools-mode-start editable-tools-edit' type='button'>Edit</button>
+                            <button class='site-form-button editable-tools-mode-edit editable-tools-save' type='button'>Save</button>
+                            <button class='site-form-button editable-tools-mode-edit editable-tools-stop' type='button'>Stop</button>
+                        </div>-->
+                        {% block content %}{% endblock %}
+                    </div></td>
+                    <td id='site-content-r'></td>
+                </tr>
+                <tr><td id='site-content-lb'></td><td id='site-content-b'></td><td id='site-content-rb'></td></tr>
+                </table>
+            </div>
+        </div>
+
+        {% endblock %}
+    </body>
+</html>

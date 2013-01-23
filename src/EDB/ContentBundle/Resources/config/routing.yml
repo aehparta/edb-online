@@ -1,0 +1,45 @@
+EDBContentBundle_resources:
+    pattern:  /resources.{_format}
+    defaults: { _controller: EDBContentBundle:Resource:list, _format: ~ }
+
+EDBContentBundle_search:
+    pattern:  /search/{category_id}.{_format}
+    defaults: { _controller: EDBContentBundle:Article:search, _format: ~ }
+    requirements:
+        category_id: \d+
+        _method: GET
+
+EDBContentBundle_resource:
+    pattern:  /resources/{identifier}.{_format}
+    defaults: { _controller: EDBContentBundle:Resource:do, _format: ~ }
+    requirements:
+        identifier: \d+
+
+EDBContentBundle_categories:
+    pattern:  /categories.{_format}
+    defaults: { _controller: EDBContentBundle:Category:list, _format: ~ }
+
+EDBContentBundle_category:
+    pattern:  /categories/{identifier}.{_format}
+    defaults: { _controller: EDBContentBundle:Category:do, _format: ~ }
+    requirements:
+        identifier: \d+
+
+EDBContentBundle_articles:
+    pattern:  /articles.{_format}
+    defaults: { _controller: EDBContentBundle:Article:list, _format: ~ }
+    requirements:
+        _method: GET
+
+EDBContentBundle_article:
+    pattern:  /articles/{identifier}.{_format}
+    defaults: { _controller: EDBContentBundle:Article:do, _format: ~ }
+    requirements:
+        identifier: \d+
+
+EDBContentBundle_attachment:
+    pattern:  /attachments/{attachment_id}.{_format}
+    defaults: { _controller: EDBContentBundle:Attachment:do, attachment_id: 0, _format: ~ }
+    requirements:
+        identifier: \d+
+

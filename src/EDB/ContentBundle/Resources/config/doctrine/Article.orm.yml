@@ -1,0 +1,38 @@
+EDB\ContentBundle\Entity\Article:
+    type: entity
+    table: null
+    repositoryClass: EDB\ContentBundle\Entity\ArticleRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+        title:
+            type: string
+            length: 255
+        category:
+            type: integer
+        description:
+            type: text
+        # resources for this article
+        resources:
+            type: array
+        # attachments for this article
+        attachments:
+            type: array
+        # other data
+        data:
+            type: array
+
+        deleted:
+            type: boolean
+        created:
+            type: datetime
+        modified:
+            type: datetime
+
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]
