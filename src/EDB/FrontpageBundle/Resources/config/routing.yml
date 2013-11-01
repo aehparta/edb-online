@@ -13,4 +13,8 @@ EDBFrontpageBundle_browse:
 EDBFrontpageBundle_search:
     pattern:  /search
     defaults: { _controller: EDBFrontpageBundle:Default:search }
+
+EDBFrontpageBundle_stock:
+    pattern:  /stock
+    defaults: { _controller: EDBFrontpageBundle:Default:stock }
     

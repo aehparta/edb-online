@@ -17,3 +17,15 @@ EDBBrowserBundle_forms_article:
     requirements:
         category_id: \d+
         article_id: \d+
+
+EDBBrowserBundle_forms_article_attachments:
+    pattern:  /forms/article/attachments/{article_id}
+    defaults: { _controller: EDBBrowserBundle:Forms:articleAttachments }
+    requirements:
+        article_id: \d+
+
+EDBBrowserBundle_forms_article_stock:
+    pattern:  /forms/article/stock/{article_id}
+    defaults: { _controller: EDBBrowserBundle:Forms:articleStock }
+    requirements:
+        article_id: \d+

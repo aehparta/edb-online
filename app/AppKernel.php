@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new EDB\BrowserBundle\EDBBrowserBundle(),
             new Aehparta\SecurityBundle\AehpartaSecurityBundle(),
             new Aehparta\ResponseBundle\AehpartaResponseBundle(),
+            new Aehparta\FormBundle\AehpartaFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

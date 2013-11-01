@@ -120,7 +120,7 @@ class Articles
     }
 
 
-    public function put($o, $title, $description = '')
+    public function put($o, $title, $description = '', $stockable = true)
     {
         if (!$o) {
             $o = new Article();
@@ -132,6 +132,7 @@ class Articles
 
         $o->setTitle($title);
         $o->setDescription($description);
+        $o->setStockable($stockable);
         $o->setDeleted(false);
 
         $this->db->persist($o);

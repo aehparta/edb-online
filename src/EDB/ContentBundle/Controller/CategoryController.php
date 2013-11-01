@@ -83,7 +83,7 @@ class CategoryController extends Controller
     }
 
 
-    public function getAction(Request $request, $identifier)
+    private function getAction(Request $request, $identifier)
     {
         $o = $this->identifierAsCategory($identifier);
         if (!$o)
@@ -92,13 +92,14 @@ class CategoryController extends Controller
         $data = array();
         $data['id'] = $o->getId();
         $data['title'] = $o->getTitle();
-        $data['content'] = $o->getContent();
+        $data['description'] = $o->getDescription();
+        $data['parent'] = $o->getParent();
 
         return $this->returnOk('get', $data);
     }
 
 
-    public function putAction(Request $request, $identifier)
+    private function putAction(Request $request, $identifier)
     {
         $o = $this->identifierAsCategory($identifier);
 
@@ -122,7 +123,7 @@ class CategoryController extends Controller
     }
 
 
-    public function deleteAction(Request $request, $identifier)
+    private function deleteAction(Request $request, $identifier)
     {
         $data = array();
 

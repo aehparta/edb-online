@@ -265,4 +265,32 @@ class Attachment
     {
         return $this->hidden;
     }
+    /**
+     * @var integer
+     */
+    private $screenshot;
+
+
+    /**
+     * Set screenshot
+     *
+     * @param integer $screenshot
+     * @return Attachment
+     */
+    public function setScreenshot($screenshot)
+    {
+        $this->screenshot = $screenshot;
+    
+        return $this;
+    }
+
+    /**
+     * Get screenshot
+     *
+     * @return integer 
+     */
+    public function getScreenshot()
+    {
+        return $this->screenshot;
+    }
 }

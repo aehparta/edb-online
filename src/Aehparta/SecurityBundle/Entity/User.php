@@ -291,4 +291,32 @@ class User implements UserInterface
     {
         $this->modified = new \DateTime();
     }
+    /**
+     * @var string
+     */
+    private $apikey;
+
+
+    /**
+     * Set apikey
+     *
+     * @param string $apikey
+     * @return User
+     */
+    public function setApikey($apikey)
+    {
+        $this->apikey = $apikey;
+    
+        return $this;
+    }
+
+    /**
+     * Get apikey
+     *
+     * @return string 
+     */
+    public function getApikey()
+    {
+        return $this->apikey;
+    }
 }

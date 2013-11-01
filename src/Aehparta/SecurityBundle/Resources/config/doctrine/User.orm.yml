@@ -21,6 +21,9 @@ Aehparta\SecurityBundle\Entity\User:
         name:
             type: string
             length: 255
+        apikey:
+            type: string
+            length: 255
         description:
             type: text
 

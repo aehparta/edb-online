@@ -36,14 +36,26 @@ class FormsController extends Controller
         $data['title'] = '';
         $data['description'] = '';
         $data['portrait'] = '';
-
+        $data['stockable'] = true;
+        
         if ($article) {
             $data['title'] = $article->getTitle();
             $data['description'] = $article->getDescription();
             $data['portrait'] = $this->get('edbcontentbundle.articles')->getData($article, 'portrait');
+            $data['stockable'] = $article->getStockable();
         }
 
+        return $this->render('EDBBrowserBundle:Forms:article.html.twig', $data);
+    }
+
+    public function articleAttachmentsAction($article_id)
+    {
+        $article = $this->get('edbcontentbundle.articles')->getById($article_id);
+
+        $data = array();
+        $data['article_id'] = $article_id;
         $data['attachments'] = array();
+
         if ($article) {
             foreach ($article->getAttachments() as $aid) {
                 $o = $this->get('edbcontentbundle.attachments')->getById($aid);
@@ -62,32 +74,50 @@ class FormsController extends Controller
                 $a['url'] = $this->get('edbcontentbundle.attachments')->getUrl($o);
                 $a['screenshot'] = false;
                 $a['hidden'] = $o->getHidden();
-                
-/*                if ($o->getScreenshot() > 0) {
-                    $a['screenshot'] = $this->get('edbcontentbundle.attachments')->getUrl($o->getScreenshot());
-                } else if ($a['mime_type'] == 'pdf') {
-                    $image = new \Imagick($this->get('edbcontentbundle.attachments')->getPath($o).'[0]');
-                    $image->setResolution(600, 600);
-                    $image->resampleImage(600, 600, \Imagick::FILTER_LANCZOS, 1);
-                    $image->resizeImage(1200, 0, \Imagick::FILTER_LANCZOS, 0);
-                    $image->setImageUnits(\Imagick::RESOLUTION_PIXELSPERINCH);
-                    $image->setImageFormat( "png" );
-                    $tmpfile = '/tmp/edb-pdf-screenshot-tmp.'.uniqid().'.png';
-                    $image->writeImage($tmpfile);
 
-                    $sa = $this->get('edbcontentbundle.attachments')->create('Screenshot: '.$o->getName(), $o->getName().'.png', $tmpfile, true);
-                    $this->get('edbcontentbundle.attachments')->setScreenshot($o, $sa->getId());
-                    $this->get('edbcontentbundle.attachments')->setHidden($sa, true);
-                    $a['screenshot'] = $this->get('edbcontentbundle.attachments')->getUrl($sa->getId());
-                    $this->get('edbcontentbundle.articles')->addAttachment($article, $sa->getId());
-                }*/
-                
                 $data['attachments'][] = $a;
             }
         }
 
         $data['imagelibrary'] = $this->get('edbcontentbundle.attachments')->getImageLibrary();
 
-        return $this->render('EDBBrowserBundle:Forms:article.html.twig', $data);
+        return $this->render('EDBBrowserBundle:Forms:article_attachments.html.twig', $data);
+    }
+    
+    public function articleStockAction($article_id, $user_id = 0)
+    {
+        if (intval($user_id) < 1) {
+            $user_id = $this->getUser()->getId();
+        }
+        $stock = $this->get('edbcontentbundle.stock');
+        
+        $data = array();
+        $data['article_id'] = $article_id;
+        $items = array();
+        if (intval($article_id) > 0) {
+            $article = $this->get('edbcontentbundle.articles')->getById($article_id);
+            $names = explode(',', $article->getTitle());
+            foreach ($names as $name) {
+                $data['names'][] = trim($name);
+            }
+            $items = $stock->getAllByArticleAndUser($article_id, $user_id);
+        } else {
+            $data['names'] = array();
+            $items = $stock->getAllByUser($user_id);
+        }
+        
+        $data['stock'] = array();
+        foreach ($items as $item) {
+            $data['stock'][] = array(
+                'article_id' => $item->getItemId(),
+                'name' => $item->getName(),
+                'package' => $item->getPackage(),
+                'quantity' => $item->getQuantity(),
+                'note' => $item->getNote(),
+                'storage' => $item->getStorage(),
+            );
+        }
+        
+        return $this->render('EDBBrowserBundle:Forms:stock.html.twig', $data);
     }
 }

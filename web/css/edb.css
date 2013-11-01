@@ -2,3 +2,7 @@
 #edb-browser table {
     border-collapse: collapse;
 }
+
+#fancybox-content {
+    color: #000;       
+}

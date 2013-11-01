@@ -87,6 +87,15 @@ class ArticleController extends Controller
             $a = array();
             $a['id'] = $article->getId();
             $a['title'] = $article->getTitle();
+            $a['category_id'] = $article->getCategory();
+            $a['description'] = $article->getDescription();
+            $a['description_short'] = $a['description'];
+            $temp = explode("<br", $a['description']);
+            $temp = explode("</h", $temp[0]);
+            $a['description_short'] = trim(strip_tags($temp[0]));
+            if (strlen($a['description_short']) > 40) {
+                $a['description_short'] = substr($a['description_short'], 0, 50).'...';
+            }
             $data['articles'][] = $a;
         }
 
@@ -122,7 +131,7 @@ class ArticleController extends Controller
     }
 
 
-    public function getAction(Request $request, $identifier)
+    private function getAction(Request $request, $identifier)
     {
         $o = $this->identifierAsArticle($identifier);
         if (!$o)
@@ -130,13 +139,10 @@ class ArticleController extends Controller
 
         $articles_s = $this->get('edbcontentbundle.articles');
 
-        $categories = $o->getCategories();
-
         $data = array();
         $data['id'] = $o->getId();
         $data['title'] = $o->getTitle();
-        $data['category_id'] = $categories[0];
-        $data['categories'] = $categories;
+        $data['category_id'] = $o->getCategory();
         $data['description'] = $o->getDescription();
         $data['portrait'] = $articles_s->getData($o, 'portrait');
 
@@ -144,7 +150,7 @@ class ArticleController extends Controller
     }
 
 
-    public function putAction(Request $request, $identifier)
+    private function putAction(Request $request, $identifier)
     {
         $o = $this->identifierAsArticle($identifier);
 
@@ -154,15 +160,16 @@ class ArticleController extends Controller
         $description = $request->request->get('description');
         $category_id = intval($request->request->get('category_id'));
         $portrait = trim($request->request->get('portrait'));
+        $stockable = trim($request->request->get('stockable')) == 'true' ? true : false;
 
         $articles_s = $this->get('edbcontentbundle.articles');
 
-        $o = $articles_s->put($o, $title, $description);
+        $o = $articles_s->put($o, $title, $description, $stockable);
         if (!$o)
             return $this->returnError('unable to create article');
         $articles_s->setCategory($o, $category_id);
         $articles_s->setData($o, 'portrait', $portrait);
-
+        
         $data = array();
         $data['id'] = $o->getId();
         $data['title'] = $o->getTitle();
@@ -174,7 +181,7 @@ class ArticleController extends Controller
     }
 
 
-    public function deleteAction(Request $request, $identifier)
+    private function deleteAction(Request $request, $identifier)
     {
         $data = array();
 

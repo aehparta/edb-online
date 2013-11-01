@@ -27,6 +27,20 @@ class Users
         return $o;
     }
 
+    public function getByApikey($apikey)
+    {
+        if (empty($apikey))
+            return false;
+        if (strlen($apikey) != 32)
+            return false;
+
+        $o = $this->db->getRepository($this->className)->findOneBy(array('apikey' => $apikey, 'deleted' => false));
+        if (!$o)
+            return false;
+
+        return $o;
+    }
+
     public function getByEmail($email)
     {
         $o = $this->db->getRepository($this->className)->findOneBy(array('email' => $email, 'deleted' => false));
@@ -36,7 +50,7 @@ class Users
         return $o;
     }
 
-    public function create($name, $username, $password, $email, $description = '')
+    public function create($name, $username, $password, $email, $description = '', $apikey = '')
     {
         $o = $this->getByUsername($username);
         if ($o)
@@ -47,6 +61,7 @@ class Users
         $o->setUsername($username);
         $o->setEmail($email);
         $o->setDescription($description);
+        $o->setApikey($apikey);
         $o->setDeleted(false);
 
         $encoder = $this->encoder->getEncoder($o);

@@ -34,7 +34,7 @@ class BrowserController extends Controller
     public function browseAction($category_id)
     {
         $show_only_undocumented = false;
-        
+
         $category = $this->get('edbcontentbundle.categories')->getById($category_id);
 
         $data = array();
@@ -57,12 +57,17 @@ class BrowserController extends Controller
                 if (strlen(strip_tags($article->getDescription())) > 0)
                     continue;
             }
-            
+
             $a = array();
             $a['id'] = $article->getId();
-            $a['title'] = $article->getTitle();
-            $data['articles'][] = $a;
+            $a['category_id'] = $article->getCategory();
+            $titles = explode(',', $article->getTitle());
+            foreach ($titles as $title) {
+                $a['title'] = trim($title);
+                $data['articles'][$a['title']] = $a;
+            }
         }
+        ksort($data['articles']);
 
         return $this->render('EDBBrowserBundle:Browser:browse.html.twig', $data);
     }

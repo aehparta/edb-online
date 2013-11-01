@@ -31,4 +31,11 @@ class DefaultController extends Controller
 
         return $this->render('EDBFrontpageBundle:Default:search.html.twig', $data);
     }
+    
+    public function stockAction()
+    {
+        $data = array();
+
+        return $this->render('EDBFrontpageBundle:Default:stock.html.twig', $data);
+    }
 }

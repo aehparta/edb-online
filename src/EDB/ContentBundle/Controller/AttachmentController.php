@@ -7,67 +7,40 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
+use Aehparta\ResponseBundle\Controller\ResponseController;
 
 
-class AttachmentController extends Controller
+class AttachmentController extends ResponseController
 {
-    private function returnRequest($template, $data)
-    {
-        $view = View::create($data);
-        if (strpbrk(":", $template))
-            $view->setTemplate(new TemplateReference($template));
-        else
-            $view->setTemplate(new TemplateReference('EDBContentBundle', 'Resource', $template));
-
-        return $this->get('fos_rest.view_handler')->handle($view);
-    }
-
-
-    private function returnOk($template, $data)
-    {
-        $data['success'] = true;
-
-        return $this->returnRequest($template, $data);
-    }
-
-
-    private function returnError($message)
-    {
-        $data = array();
-
-        $data['success'] = false;
-        $data['message'] = $message;
-
-        return $this->returnRequest('error', $data);
-    }
-
-
     public function doAction(Request $request, $attachment_id)
     {
         $method = $request->getMethod();
 
-        if ($this->get('security.context')->isGranted('ROLE_USER') === false && $method != 'GET') {
-            return $this->returnError('access denied');
+        $apikey = $request->request->get('apikey');
+        $user = $this->get('aehpartasecuritybundle.users')->getByApikey($apikey);
+
+        if ($user) {
+            // accept apikey
+        } else if ($this->get('security.context')->isGranted('ROLE_USER') === false && $method != 'GET') {
+            return $this->returnError('EDBContentBundle:Resource:error.html.twig', 'access denied');
         }
 
-        if ($method == 'POST') {
-            return $this->postAction($request);
+        if ($method == 'POST' or $method == 'PUT') {
+            return $this->putAction($request);
         } else if ($method == 'DELETE') {
             return $this->deleteAction($request, $attachment_id);
         }
 
-        return $this->returnError('invalid method');
+        return $this->returnError('EDBContentBundle:Resource:error.html.twig', 'invalid method');
     }
 
 
-    public function postAction(Request $request)
+    private function putAction(Request $request)
     {
         $data = array();
-        
+
         if (empty($_FILES))
-            return $this->returnError('invalid request');
-        
-        error_log("upload");
+            return $this->returnError('EDBContentBundle:Resource:error.html.twig', 'invalid request');
 
         $filename = $_FILES['Filedata']['name'];
         $tmpfile = $_FILES['Filedata']['tmp_name'];
@@ -82,14 +55,14 @@ class AttachmentController extends Controller
             $this->get('edbcontentbundle.articles')->addAttachment($article_id, $o->getId());
         }
 
-        return $this->returnOk('get', $data);
+        return $this->returnOk('EDBContentBundle:Resource:get.html.twig', $data);
     }
 
 
-    public function deleteAction(Request $request, $attachment_id)
+    private function deleteAction(Request $request, $attachment_id)
     {
         $data = array();
         $this->get('edbcontentbundle.attachments')->delete($attachment_id);
-        return $this->returnOk('get', $data);
+        return $this->returnOk('EDBContentBundle:Resource:get.html.twig', $data);
     }
 }

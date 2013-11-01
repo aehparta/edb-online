@@ -1,8 +1,12 @@
 parameters:
     aehpartasecuritybundle.users.class:               Aehparta\SecurityBundle\Services\Users
     aehpartasecuritybundle.users.className:           Aehparta\SecurityBundle\Entity\User
+    aehpartasecuritybundle.encrypt.class:             Aehparta\SecurityBundle\Services\Encrypt
 
 services:
     aehpartasecuritybundle.users:
         class:      %aehpartasecuritybundle.users.class%
         arguments:  [ "@doctrine.orm.entity_manager", "%aehpartasecuritybundle.users.className%", "@security.encoder_factory" ]
+    aehpartasecuritybundle.encrypt:
+        class:      %aehpartasecuritybundle.encrypt.class%
+        arguments:  [ "@doctrine.orm.entity_manager" ]

@@ -8,7 +8,7 @@ body
 {
 	width: auto;
 	margin: 0 auto;
-	background: #191919;
+	background: #fff;
 	color: white;
 }
 
@@ -35,6 +35,13 @@ a img
 
 .icon {
     margin-right: 5px;
+    vertical-align: bottom;
+}
+
+/******************************************************************************/
+/* header */
+#site-header {
+    background: #191919;
 }
 
 /******************************************************************************/
@@ -69,11 +76,20 @@ a img
     position: absolute;
     padding: 3px;
     top: 50px;
-    margin-left: 730px;
+    right: 20px;
     background: #fff;
     border: 1px solid #777;
     border-bottom: 0px;
     font-size: 0.8em;
+}
+
+#site-login a {
+    color: black;
+    text-decoration: none;
+}
+
+#site-login a:hover {
+    text-decoration: underline;
 }
 
 /******************************************************************************/
@@ -81,7 +97,7 @@ a img
 #site-body {
 	color: black;
 	margin: auto auto 40px;
-	width: 864px;
+	width: auto;
 }
 
 /*
@@ -151,8 +167,11 @@ a img
 
 #page-content
 {
+    padding: 20px;
+    background: #fff;
+    margin: auto auto 0;
+    width: 80%;
     color: black;
-    width: 800px;
     min-height: 300px;
 }
 
@@ -231,83 +250,6 @@ a img
 }
 
 /******************************************************************************/
-/* forms */
-.site-form {
-    color: #000000;
-    border: 0px solid #ccc;
-    display: none;
-}
-
-.site-form-header, .site-form-content {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: 10px;
-    padding-bottom: 3px;
-}
-
-.site-form-content {
-    padding: 5px;
-}
-
-.site-form-content table {
-    width: 100%;
-}
-
-.site-form-footer {
-    margin-top: 10px;
-    padding-top: 3px;
-    text-align: right;
-}
-
-.site-form-error {
-    display: none;
-    font-size: 9pt;
-    font-weight: bold;
-    color: #fdd;
-    border: 1px solid #522;
-    background: #722;
-    border-radius: 5px;
-    padding: 3px;
-    margin: 3px;
-}
-
-.site-form-input-label
-{
-    padding-right: 10px;
-    font-size: 10pt;
-    text-align: right;
-    cursor: help;
-}
-
-.site-form-button, .site-form-input, .site-form-textarea {
-    background: #ddd;
-    border: 1px solid #aaa;
-    font-size: 9pt;
-    font-weight: normal;
-    border-radius: 5px;
-    padding: 3px;
-    margin: 5px;
-    min-height: 20px;
-}
-
-.site-form-button {
-    font-weight: bold;
-    padding-left: 6px;
-    padding-right: 6px;
-}
-
-.site-form-textarea {
-    width: 90%;
-}
-
-.site-form-button:hover {
-    background: #bbb;
-}
-
-.site-form-button:active {
-    background: #aaa;
-}
-
-/******************************************************************************/
 /* default tables */
 .tbl {
     border: 1px solid #aaa;
@@ -340,6 +282,22 @@ a img
     vertical-align: top;
 }
 
+.tbl-editable input {
+    background: transparent;
+    border: 0px;
+    font: inherit;
+}
+
+.tbl-editable input:hover {
+    background: #eef;
+}
+
+.tbl-editable select {
+    background: transparent;
+    border: 0px;
+    font: inherit;
+}
+
 /******************************************************************************/
 /* editable contents (aloha) */
 div.aloha-sidebar-bar {
@@ -365,14 +323,13 @@ div.aloha-sidebar-bar {
     float: right;
     right: 0px;
     top: 0px;
-    display: none;
+/*     display: none; */
 }
 
 .editable-tools-mode-start {
 }
 
 .editable-tools-mode-edit {
-    display: none;
 }
 
 .editable-edit-title {
@@ -410,6 +367,7 @@ div.aloha-sidebar-bar {
 /* image browser */
 .site-image-browser {
     display: none;
+    color: #000;
 }
 
 .site-image-browser ul {

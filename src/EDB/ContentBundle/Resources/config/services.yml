@@ -7,6 +7,8 @@ parameters:
     edbcontentbundle.articles.className:            EDB\ContentBundle\Entity\Article
     edbcontentbundle.attachments.class:             EDB\ContentBundle\Services\Attachments
     edbcontentbundle.attachments.className:         EDB\ContentBundle\Entity\Attachment
+    edbcontentbundle.stock.class:                   EDB\ContentBundle\Services\Stock
+    edbcontentbundle.stock.className:               EDB\ContentBundle\Entity\StockItem
 
 services:
     edbcontentbundle.resources:
@@ -24,3 +26,7 @@ services:
     edbcontentbundle.attachments:
         class:      %edbcontentbundle.attachments.class%
         arguments:  ["@doctrine.orm.entity_manager", "%edbcontentbundle.attachments.className%" ]
+
+    edbcontentbundle.stock:
+        class:      %edbcontentbundle.stock.class%
+        arguments:  ["@doctrine.orm.entity_manager", "%edbcontentbundle.stock.className%" ]

@@ -2,13 +2,6 @@ EDBContentBundle_resources:
     pattern:  /resources.{_format}
     defaults: { _controller: EDBContentBundle:Resource:list, _format: ~ }
 
-EDBContentBundle_search:
-    pattern:  /search/{category_id}.{_format}
-    defaults: { _controller: EDBContentBundle:Article:search, _format: ~ }
-    requirements:
-        category_id: \d+
-        _method: GET
-
 EDBContentBundle_resource:
     pattern:  /resources/{identifier}.{_format}
     defaults: { _controller: EDBContentBundle:Resource:do, _format: ~ }
@@ -43,3 +36,16 @@ EDBContentBundle_attachment:
     requirements:
         identifier: \d+
 
+EDBContentBundle_search:
+    pattern:  /search/{category_id}.{_format}
+    defaults: { _controller: EDBContentBundle:Article:search, _format: ~ }
+    requirements:
+        category_id: \d+
+        _method: GET
+
+EDBContentBundle_stock:
+    pattern:  /stock/{article_id}/{user_id}.{_format}
+    defaults: { _controller: EDBContentBundle:Stock:do, user_id: 0, _format: ~ }
+    requirements:
+        article_id: \d+
+        user_id: \d+

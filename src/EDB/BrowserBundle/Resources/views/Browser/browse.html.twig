@@ -1,3 +1,5 @@
+<div id='edb-article-loading'><img src='{{ asset('images/loading/basic_black_128x128.png') }}' /></div>
+
 <div id='edb-browser'
     edb-category-id='{{ category_id }}'
     edb-controller='{{ path('EDBBrowserBundle_browse', { 'category_id': category_id }) }}'
@@ -6,7 +8,7 @@
 
 <div id='edb-browser-header'>
 
-<div id='edb-browser-search'>
+<div id='edb-browser-search' class='site-form-input'>
     <input id='edb-browser-search-query' edb-search-url='{{ path('EDBContentBundle_search', { 'category_id': category_id }) }}' value='' />
     <img id='edb-browser-search-send' src='{{ asset('images/coquette/16x16/search.png') }}' />
 </div>
@@ -36,11 +38,17 @@
 {% endif %}
 
 {% for category in categories %}
-<tr class='tbl-row edb-category' edb-category-id='{{ category.id }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': category.id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/folder.png') }}' /><div class='tbl-label'>{{ category.title }}</div></td></tr>
+<tr class='tbl-row edb-category' edb-category-id='{{ category.id }}' edb-modify-url='{{ path('EDBContentBundle_category', { 'identifier': category.id, '_format': 'json' }) }}' edb-category-url='{{ path('EDBBrowserBundle_browse', { 'category_id': category.id }) }}'>
+    <td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/folder.png') }}' /><div class='tbl-label'>{{ category.title }}</div></td>
+    <td title='Select this category' class='edb-selection'><img class='edb-select' src='{{ asset('images/coquette/24x24/add.png') }}' /><img class='edb-selected' src='{{ asset('images/coquette/24x24/tag_blue.png') }}' /></td>
+</tr>
 {% endfor %}
 
 {% for article in articles %}
-<tr class='tbl-row edb-article' edb-article-id='{{ article.id }}' form-url='{{ path('EDBBrowserBundle_forms_article', { 'category_id': category_id, 'article_id': article.id }) }}'><td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/text_page.png') }}' /><div class='tbl-label'>{{ article.title }}</div></td></tr>
+<tr class='tbl-row edb-article' edb-article-id='{{ article.id }}' edb-modify-url='{{ path('EDBContentBundle_article', { 'identifier': article.id, '_format': 'json' }) }}' form-url='{{ path('EDBBrowserBundle_forms_article', { 'category_id': article.category_id, 'article_id': article.id }) }}'>
+    <td><img class='tbl-icon' src='{{ asset('images/coquette/24x24/text_page.png') }}' /><div class='tbl-label'>{{ article.title }}</div></td>
+    <td title='Select this article' class='edb-selection'><img class='edb-select' src='{{ asset('images/coquette/24x24/add.png') }}' /><img class='edb-selected' src='{{ asset('images/coquette/24x24/tag_blue.png') }}' /></td>
+</tr>
 {% endfor %}
 
 <table class='tbl edb-results'>

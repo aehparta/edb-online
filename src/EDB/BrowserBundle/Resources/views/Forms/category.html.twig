@@ -1,6 +1,12 @@
 {% if is_granted('ROLE_USER') %}
-<div id='edb-form-category' class='site-form editable-container' edb-category-id='{{ category_id }}' site-form-method='PUT' site-form-url='{{ path('EDBContentBundle_category', { 'identifier': 0, '_format': 'json' }) }}'>
+<div id='edb-form-category' class='site-form editable-container' edb-parent-category-id='{{ category_id }}' edb-category-id='0' site-form-method='PUT' site-form-url='{{ path('EDBContentBundle_category', { 'identifier': 0, '_format': 'json' }) }}'>
+
+<div class='editable-tools'>
+    <button class='site-form-button edb-editor-send edb-editor-button' type='button' title='Save changes'><img class='icon' src='{{ asset('/images/coquette/16x16/accept.png') }}' />Save</button>
+</div>
+
 <div class='site-form-header'>
+<button class='site-form-button site-form-close edb-tools-category-close' type='button' title='Back'><img class='icon' src='{{ asset('/images/coquette/16x16/back.png') }}' />Back</button>
 <h2>Add new category under {{ category }}</h2>
 </div>
 <div class='site-form-error site-form-message'></div>
@@ -15,8 +21,6 @@
 </div>
 
 <div class='site-form-footer'>
-<button type='button' class='site-form-button site-form-send'>Save</button>
-<button type='button' class='site-form-button site-form-close'>Cancel</button>
 </div>
 </div>
 {% endif %}

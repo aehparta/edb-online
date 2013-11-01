@@ -1,41 +1,47 @@
 <div id='edb-form-article'
-    class='site-form editable-container'
+    class='edb-editor editable-container'
     edb-article-id='{{ id }}'
     edb-category-id='{{ category_id }}'
     edb-browser-url='{{ path('EDBFrontpageBundle_browse', { 'category_id': category_id, 'article_id': id }) }}'
-    site-form-method='PUT'
-    site-form-url='{{ path('EDBContentBundle_article', { 'identifier': id, '_format': 'json' }) }}'
+    edb-editor-method='PUT'
+    edb-editor-url='{{ path('EDBContentBundle_article', { 'identifier': id, '_format': 'json' }) }}'
     >
 
 {% if is_granted('ROLE_USER') %}
 <div class='editable-tools'>
 {% if id < 1 %}
-    <button class='site-form-button site-form-send' type='button'>Save</button>
-    <button class='site-form-button site-form-close' type='button'>x</button>
+    <button class='site-form-button edb-editor-send edb-editor-button' type='button' title='Save changes'><img class='icon' src='{{ asset('/images/coquette/16x16/accept.png') }}' />Save</button>
 {% else %}
-    <button class='site-form-button editable-tools-mode-start editable-tools-delete' type='button'>Delete</button>
-    <button class='site-form-button editable-tools-mode-start editable-tools-edit' type='button'>Edit</button>
-    <button class='site-form-button editable-tools-mode-start site-form-close' type='button'>x</button>
-    <button class='site-form-button editable-tools-mode-edit site-form-send' type='button'>Save</button>
-    <button class='site-form-button editable-tools-mode-edit editable-tools-stop' type='button'>Stop</button>
+    <button
+        site-form-url='{{ path('ArhpartaFormBundle_confirm_delete', { 'title': 'Confirm delete article', 'message': 'Do you really want to delete this article?' }) }}'
+        site-form-action='{{ path('EDBContentBundle_article', { 'identifier': id, '_format': 'json' }) }}'
+        class='site-form-button editable-tools-mode-start edb-tools-article-delete' type='button' title='Delete article'>
+            <img class='icon' src='{{ asset('/images/coquette/16x16/delete.png') }}' />
+            Delete
+    </button>
+    <button class='site-form-button editable-tools-mode-start edb-tools-article-edit' type='button' title='Edit article'><img class='icon' src='{{ asset('/images/coquette/16x16/process.png') }}' />Edit</button>
+    <button class='site-form-button editable-tools-mode-edit edb-editor-send edb-editor-button' type='button' title='Save changes'><img class='icon' src='{{ asset('/images/coquette/16x16/accept.png') }}' />Save</button>
+    <button class='site-form-button editable-tools-mode-edit edb-tools-article-stop' type='button' title='Stop editing'><img class='icon' src='{{ asset('/images/coquette/16x16/block.png') }}' />Cancel</button>
 {% endif %}
-</div>
-{% else %}
-<div class='editable-tools'>
-    <button class='site-form-button site-form-close' type='button'>x</button>
 </div>
 {% endif %}
 
-<div class='site-form-header'>
+<div class='edb-editor-header'>
+<button class='site-form-button edb-tools-article-close' type='button' title='Back'><img class='icon' src='{{ asset('/images/coquette/16x16/back.png') }}' />Back</button>
 {% if id < 1 %}
-<h2>Add new article under {{ category }}</h2>
+<h2 name='title' id='edb-article-title' class='editable editable-single-line'>< title ></h2>
 {% else %}
-<h2>&nbsp;</h2>
+<h2 name='title' id='edb-article-title' class='editable editable-single-line'>{{ title | raw }}</h2>
 {% endif %}
 </div>
-<div class='site-form-error site-form-message'></div>
+<div class='edb-editor-error edb-editor-message'></div>
 
-<div id='edb-article-div-document' class='site-form-content edb-article-chapter'>
+<div id='edb-article-div-document' class='site-form-content edb-editor-content edb-article-chapter'>
+
+<div class='edb-article-edit-extras'>
+    <label for='stockable'>Is stockable (components etc)</label>
+    <input name='stockable' type='checkbox' {% if stockable %}checked='checked'{% endif %} value='stockable'/>
+</div>
 
 <h3>Documentation</h3>
 <span class='editable-edit-title'>Portrait:<br /></span>
@@ -45,90 +51,16 @@
     <a id='edb-article-portrait-show' href='{{ portrait }}'><img src='{{ portrait }}' /></a>
 </div>
 
-<input name='category_id' static='true' type='hidden' class='site-form-input' value='{{ category_id }}' />
-<input name='article_id' static='true' type='hidden' class='site-form-input' value='{{ id }}' />
-<span class='editable-edit-title'>Title:<br /></span>
-<h1 name='title' class='editable editable-single-line'>{{ title | raw }}</h1>
+<input name='category_id' static='true' type='hidden' class='edb-editor-input' value='{{ category_id }}' />
+<input name='article_id' static='true' type='hidden' class='edb-editor-input' value='{{ id }}' />
 <span class='editable-edit-title'>Description:<br /></span>
 <div name='description' class='editable'>{{ description | raw }}</div>
 </div>
 
-<div id='edb-article-div-attachments' class='site-form-content edb-article-chapter'>
-<h3>Attachments</h3>
-<ul id='edb-article-attachments' file-post-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': 0, '_format': 'json' }) }}'>
+{% render path('EDBBrowserBundle_forms_article_attachments', { 'article_id': id }) %}
 
-{% for attachment in attachments %}
-{% if attachment.hidden == 0 %}
-<li id='{{ attachment.id }}' class='edb-article-attachment'
-    edb-attachment-mod-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': attachment.id, '_format': 'json' }) }}'>
-    <a target='edb-pdf-window' href='{{ attachment.url }}'>
-        {% set _icon = '/images/aesthetica/16x16/cd.png' %}
-        {% if attachment.mime_family == 'image' %}
-            {% set _icon = '/images/aesthetica/16x16/image.png' %}
-        {% elseif attachment.mime_family == 'text' %}
-            {% set _icon = '/images/aesthetica/16x16/page.png' %}
-        {% elseif attachment.mime_type == 'pdf' %}
-            {% set _icon = '/images/aesthetica/16x16/pdf.png' %}
-        {% elseif attachment.mime_type == 'zip' or attachment.mime_type == 'rar' %}
-            {% set _icon = '/images/aesthetica/16x16/archive.png' %}
-        {% endif %}
-        <img class='icon' src='{{ asset(_icon) }}' />
-        {{ attachment.title }}
-    </a>
-    <div class='edb-article-attachment-tools'>
-        {% if is_granted('ROLE_USER') %}
-            <img class='icon edb-article-attachment-tool edb-article-attachment-delete' src='{{ asset('/images/aesthetica/16x16/remove.png') }}' />
-        {% endif %}
-    </div>
-</li>
+{% if stockable and is_granted('ROLE_USER') %}
+{% render path('EDBBrowserBundle_forms_article_stock', { 'article_id': id }) %}
 {% endif %}
-{% endfor %}
-
-</ul>
-{% if is_granted('ROLE_USER') %}
-<input type='file' id='edb-article-attachment-upload' />
-{% endif %}
-</div>
-
-<div class='site-form-footer'>
-<!-- <button type='button' class='site-form-button site-form-send'>Save</button>
-<button type='button' class='site-form-button site-form-close'>Cancel</button> -->
-</div>
-
-<div id='edb-article-image-browser' class='site-image-browser'>
-<div id='edb-article-image-select'>
-<h1>Select image</h1>
-<h3>From attachments</h3>
-<ul>
-{% for attachment in attachments %}
-    {% if attachment.mime_family == 'image' %}
-        <li>
-            <img class='site-image-browser-image' src='{{ attachment.url }}' />
-        </li>
-    {% endif %}
-{% endfor %}
-</ul>
-<h3>From image library</h3>
-<ul>
-<li>
-    <img class='site-image-browser-image' src='' alt='No picture' />
-</li>
-{% for attachment in imagelibrary %}
-    {% if attachment.mime_family == 'image' %}
-        <li>
-            <img class='site-image-browser-image' src='{{ attachment.url }}' />
-        </li>
-    {% endif %}
-{% endfor %}
-</ul>
-</div>
-
-<div id='edb-article-image-crop'>
-<h1>Crop image</h1>
-<button type='button' id='edb-article-image-browser-save' class='site-form-button'>Save</button>
-<img src='' />
-</div>
-
-</div>
 
 </div>

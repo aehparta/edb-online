@@ -321,4 +321,32 @@ class Article
     {
         return $this->description;
     }
+    /**
+     * @var boolean
+     */
+    private $stockable;
+
+
+    /**
+     * Set stockable
+     *
+     * @param boolean $stockable
+     * @return Article
+     */
+    public function setStockable($stockable)
+    {
+        $this->stockable = $stockable;
+    
+        return $this;
+    }
+
+    /**
+     * Get stockable
+     *
+     * @return boolean 
+     */
+    public function getStockable()
+    {
+        return $this->stockable;
+    }
 }

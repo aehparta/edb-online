@@ -27,7 +27,7 @@ class ResponseController extends Controller
     }
 
 
-    public function returnError($message)
+    public function returnError($template, $message)
     {
         $data = array();
 

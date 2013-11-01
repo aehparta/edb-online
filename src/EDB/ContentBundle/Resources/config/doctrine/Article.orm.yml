@@ -25,7 +25,12 @@ EDB\ContentBundle\Entity\Article:
         # other data
         data:
             type: array
-
+        
+        stockable:
+            type: boolean
+            options:
+                default: true
+        
         deleted:
             type: boolean
         created:
