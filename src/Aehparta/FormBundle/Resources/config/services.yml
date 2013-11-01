@@ -1,0 +1,7 @@
+parameters:
+#    aehparta_form.example.class: Aehparta\FormBundle\Example
+
+services:
+#    aehparta_form.example:
+#        class: %aehparta_form.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,24 @@
+<div class='site-form'>
+<div class='site-form-header'>
+<h2><img class='icon' src='{{ asset('images/coquette/32x32/help.png') }}'/>{{ title }}</h2>
+</div> <!-- site-form-header -->
+
+<p class='site-form-error'></p>
+
+<div class='site-form-content'>
+<p class='site-form-info'>{{ message }}</p>
+</div> <!-- site-form-content -->
+
+<div class='site-form-footer'>
+{% if title_save != '' %}
+<button type='button' class='site-form-button site-form-save'><img class='icon' src='{{ asset('images/coquette/16x16/accept.png') }}'/>{{ title_save }}</button>
+{% endif %}
+{% if title_delete != '' %}
+<button type='button' class='site-form-button site-form-delete'><img class='icon' src='{{ asset('images/coquette/16x16/delete.png') }}'/>{{ title_delete }}</button>
+{% endif %}
+{% if title_cancel != '' %}
+<button type='button' class='site-form-button site-form-cancel'><img class='icon' src='{{ asset('images/coquette/16x16/block.png') }}'/>{{ title_cancel }}</button>
+{% endif %}
+</div> <!-- site-form-footer -->
+
+</div> <!-- site-form -->

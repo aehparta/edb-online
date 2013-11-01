@@ -1,0 +1,12 @@
+ArhpartaFormBundle_confirm:
+    pattern:  /confirm
+    defaults: { _controller: AehpartaFormBundle:Form:confirm }
+    requirements:
+        _method: GET
+
+ArhpartaFormBundle_confirm_delete:
+    pattern:  /confirm_delete
+    defaults: { _controller: AehpartaFormBundle:Form:confirmDelete }
+    requirements:
+        _method: GET
+
