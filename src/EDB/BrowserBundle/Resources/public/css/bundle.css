@@ -181,6 +181,14 @@
     display: none;
 }
 
+.edb-article-stock-item input {
+    border-bottom: 1px dashed #aaa;
+}
+
+.edb-stock-outoff {
+    background: #fcc;
+}
+
 /******************************************************************************/
 /* selections */
 .edb-selection {

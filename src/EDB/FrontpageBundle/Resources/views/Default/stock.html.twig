@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+<h1>My components</h1>
+
+{% if is_granted('ROLE_USER') %}
+{% render path('EDBBrowserBundle_forms_article_stock', { 'article_id': 0 }) %}
+{% endif %}
+
+{% endblock content %}

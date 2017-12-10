@@ -1,0 +1,54 @@
+{% if is_granted('ROLE_USER') %}
+
+<div id='edb-article-div-stock' class='site-form-content edb-article-chapter' site-form-reload-url='{{ path('EDBBrowserBundle_forms_article_stock', { 'article_id': article_id } ) }}'>
+<h3>Stock</h3>
+
+<table id='edb-article-stock' class='tbl tbl-editable'>
+<tr class='tbl-row-static'>
+    <td>Item</td>
+    <td>Note</td>
+    <td>Qty.</td>
+    <td>Package</td>
+    <td>Storage</td>
+    <td>Remove</td>
+</tr>
+<tr id='edb-article-stock-empty-item' edb-stock-item-id='0' class='tbl-row' edb-stock-item-update-url='{{ path('EDBContentBundle_stock', { 'article_id': article_id, '_format': 'json' }) }}'>
+    <td>
+        <select id='edb-article-stock-item-name'>
+        {% for name in names %}
+            <option value='{{ name }}'>{{ name }}</option>
+        {% endfor %}
+        </select>
+    </td>
+    <td><input id='edb-article-stock-item-note' type='text' value='' /></td>
+    <td><input id='edb-article-stock-item-qty' type='text' value='' /></td>
+    <td><input id='edb-article-stock-item-package' type='text' value='' /></td>
+    <td><input id='edb-article-stock-item-storage' type='text' value='' /></td>
+    <td><input id='edb-article-stock-item-remove' type='checkbox' value='' /></td>
+</tr>
+
+{% for item in stock %}
+<tr class='tbl-row edb-article-stock-item {% if item.quantity == '0' %}edb-stock-outoff{% endif %}' edb-stock-item-id='{{ item.id }}' edb-stock-item-update-url='{{ path('EDBContentBundle_stock', { 'article_id': item.article_id, '_format': 'json' }) }}'>
+    <td>
+        {% if display_links %}
+            <a href=''><input id='edb-article-stock-item-name' type='text' readonly='readonly' value='{{ item.name }}' /></a>
+        {% else %}
+            <input id='edb-article-stock-item-name' type='text' readonly='readonly' value='{{ item.name }}' />
+        {% endif %}
+    </td>
+    <td><input id='edb-article-stock-item-note' type='text' value='{{ item.note }}' /></td>
+    <td><input id='edb-article-stock-item-qty' type='text' value='{{ item.quantity }}' /></td>
+    <td><input id='edb-article-stock-item-package' type='text' value='{{ item.package }}' /></td>
+    <td><input id='edb-article-stock-item-storage' type='text' value='{{ item.storage }}' /></td>
+    <td><input id='edb-article-stock-item-remove' type='checkbox' value='' /></td>
+</tr>
+{% endfor %}
+
+</table>
+
+<button id='edb-article-stock-add' class='site-form-button' type='button' title='Add new item'><img class='icon' src='{{ asset('/images/coquette/16x16/add.png') }}' />Add</button></td>
+<button id='edb-article-stock-update' class='site-form-button' type='button' title='Update stock'><img class='icon' src='{{ asset('/images/coquette/16x16/refresh.png') }}' />Update</button></td>
+
+</div>
+
+{% endif %}

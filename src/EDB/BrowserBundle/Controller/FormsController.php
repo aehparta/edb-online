@@ -101,14 +101,34 @@ class FormsController extends Controller
                 $data['names'][] = trim($name);
             }
             $items = $stock->getAllByArticleAndUser($article_id, $user_id);
+            $data['display_links'] = false;
         } else {
             $data['names'] = array();
             $items = $stock->getAllByUser($user_id);
+            $data['display_links'] = true;
         }
         
         $data['stock'] = array();
         foreach ($items as $item) {
+            if ($item->getQuantity() != '0') {
+                continue;
+            }
             $data['stock'][] = array(
+                'id' => $item->getId(),
+                'article_id' => $item->getItemId(),
+                'name' => $item->getName(),
+                'package' => $item->getPackage(),
+                'quantity' => $item->getQuantity(),
+                'note' => $item->getNote(),
+                'storage' => $item->getStorage(),
+            );
+        }
+        foreach ($items as $item) {
+            if ($item->getQuantity() == '0') {
+                continue;
+            }
+            $data['stock'][] = array(
+                'id' => $item->getId(),
                 'article_id' => $item->getItemId(),
                 'name' => $item->getName(),
                 'package' => $item->getPackage(),

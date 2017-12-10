@@ -1,0 +1,68 @@
+<div id='edb-article-div-attachments' class='site-form-content edb-article-chapter' site-form-reload-url='{{ path('EDBBrowserBundle_forms_article_attachments', { 'article_id': article_id }) }}'>
+<h3>Attachments</h3>
+<ul id='edb-article-attachments' apikey='{% if is_granted('ROLE_USER') %}{{ app.user.apikey }}{% endif %}' file-post-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': 0, '_format': 'json' }) }}'>
+
+{% for attachment in attachments %}
+{% if attachment.hidden == 0 %}
+<li id='{{ attachment.id }}' class='edb-article-attachment'
+    edb-attachment-mod-url='{{ path('EDBContentBundle_attachment', { 'attachment_id': attachment.id, '_format': 'json' }) }}'>
+    <a target='edb-pdf-window' href='{{ attachment.url }}'>
+        {% set _icon = '/images/aesthetica/16x16/cd.png' %}
+        {% if attachment.mime_family == 'image' %}
+            {% set _icon = '/images/aesthetica/16x16/image.png' %}
+        {% elseif attachment.mime_family == 'text' %}
+            {% set _icon = '/images/aesthetica/16x16/page.png' %}
+        {% elseif attachment.mime_type == 'pdf' %}
+            {% set _icon = '/images/aesthetica/16x16/pdf.png' %}
+        {% elseif attachment.mime_type == 'zip' or attachment.mime_type == 'rar' %}
+            {% set _icon = '/images/aesthetica/16x16/archive.png' %}
+        {% endif %}
+        <img class='icon' src='{{ asset(_icon) }}' />
+        {{ attachment.title }}
+    </a>
+    <div class='edb-article-attachment-tools'>
+        {% if is_granted('ROLE_USER') %}
+            <img class='icon edb-article-attachment-tool edb-article-attachment-delete' src='{{ asset('/images/aesthetica/16x16/remove.png') }}' />
+        {% endif %}
+    </div>
+</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+{% if is_granted('ROLE_USER') %}
+<input type='file' id='edb-article-attachment-upload' />
+<img id='edb-article-upload-button-icon' class='icon' src='{{ asset('/images/coquette/16x16/add.png') }}' />
+{% endif %}
+
+<div id='edb-article-image-browser' class='site-image-browser'>
+<div id='edb-article-image-select'>
+<h1>Select image</h1>
+<h3>From attachments</h3>
+<ul>
+{% for attachment in attachments %}
+    {% if attachment.mime_family == 'image' %}
+        <li>
+            <img class='site-image-browser-image' src='{{ attachment.url }}' />
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+<h3>From image library</h3>
+<ul>
+<li>
+    <img class='site-image-browser-image' src='' alt='No picture' />
+</li>
+{% for attachment in imagelibrary %}
+    {% if attachment.mime_family == 'image' %}
+        <li>
+            <img class='site-image-browser-image' src='{{ attachment.url }}' />
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+
+</div>
+
+</div>

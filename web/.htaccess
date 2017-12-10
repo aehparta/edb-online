@@ -12,5 +12,5 @@ RewriteCond %{REQUEST_URI} !^/js [NC]
 RewriteCond %{REQUEST_URI} !^/uploads [NC]
 RewriteCond %{REQUEST_URI} !^/css [NC]
 
-RewriteRule ^(.*)\.* app_dev.php [NC,L,NE]
+RewriteRule ^(.*)\.* app.php [NC,L,NE]
 

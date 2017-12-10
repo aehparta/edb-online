@@ -53,17 +53,28 @@ function edb_OnReadyBrowserBundle() {
     });
     
     $('body').on('click', '#edb-article-stock-update', function() {
-        var url = $('#edb-article-stock').attr('site-form-url');
         $('.edb-article-stock-item').each(function() {
+            var url = $(this).attr('edb-stock-item-update-url');
             var item = {
+                id: $(this).attr('edb-stock-item-id'),
                 name: $(this).find('#edb-article-stock-item-name').val(),
                 quantity: $(this).find('#edb-article-stock-item-qty').val(),
                 package: $(this).find('#edb-article-stock-item-package').val(),
                 note: $(this).find('#edb-article-stock-item-note').val(),
                 storage: $(this).find('#edb-article-stock-item-storage').val(),
-                remove: $(this).find('#edb-article-stock-item-remove').attr('checked') == 'checked' ? true : false,
             };
-            $.ajax({ type: 'PUT', data: item, url: url });
+            if ($(this).find('#edb-article-stock-item-remove').attr('checked') == 'checked') {
+                $.ajax({ type: 'DELETE', data: item, url: url });
+            } else {
+                $.ajax({ type: 'PUT', data: item, url: url });
+            }
+        }).promise().done(function() {
+            $('#edb-article-stock').fadeOut('fast').promise().done(function() {
+                var url = $('#edb-article-div-stock').attr('site-form-reload-url');
+                $.get(url, function(data) {
+                    $('#edb-article-div-stock').replaceWith(data);
+                });
+            });
         });
     });
 

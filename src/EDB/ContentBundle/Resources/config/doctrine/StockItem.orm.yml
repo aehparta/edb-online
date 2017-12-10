@@ -1,0 +1,44 @@
+EDB\ContentBundle\Entity\StockItem:
+    type: entity
+    table: null
+    repositoryClass: EDB\ContentBundle\Entity\StockItemRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        
+        item_id:
+            type: integer
+
+        user_id:
+            type: integer
+
+        name:
+            type: string
+            length: 255
+        
+        quantity:
+            type: string
+            length: 255
+            
+        package:
+            type: string
+            length: 255
+        
+        note:
+            type: text
+        storage:
+            type: text
+            
+        deleted:
+            type: boolean
+        created:
+            type: datetime
+        modified:
+            type: datetime
+    
+    lifecycleCallbacks:
+        prePersist: [ onCreate ]
+        preUpdate: [ onUpdate ]
